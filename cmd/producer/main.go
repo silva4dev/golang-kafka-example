@@ -10,9 +10,8 @@ import (
 func main() {
 	deliveryChan := make(chan kafka.Event)
 	producer := NewKafkaProducer()
-	Publish("Mensagem", "teste", producer, nil, deliveryChan)
-	go DeliveryReport(deliveryChan)
-	producer.Flush(1000)
+	Publish("transferiu", "teste", producer, []byte("transferencia"), deliveryChan)
+	DeliveryReport(deliveryChan)
 	// e := <-deliveryChan
 	// msg := e.(*kafka.Message)
 	// if msg.TopicPartition.Error != nil {
